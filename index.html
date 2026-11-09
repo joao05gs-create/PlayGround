@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#100d12">
+  <link rel="icon" href="data:,">
+  <title>ONE ROUND — Hell on Pickup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="game-canvas" aria-label="3D first-person game"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">◉</span><span>ONE<span class="brand-dash">—</span>ROUND</span><small>HELL ON PICKUP</small></div>
+      <div class="level-tag"><i></i> SECTOR 09 <span>·</span> THE FOUNDRY</div>
+      <button id="sound-toggle" class="icon-btn" aria-label="Toggle sound">♫ <span>SOUND</span></button>
+    </header>
+    <section class="hud-left">
+      <div class="hud-label">VITALS <span id="health-value">100</span></div>
+      <div class="health-track"><div id="health-fill"></div><span class="health-glint"></span></div>
+      <div class="hud-sub">MARINE // 01</div>
+    </section>
+    <section class="hud-right">
+      <div class="hud-label">HOSTILES <span id="enemy-count">04</span></div>
+      <div class="enemy-pips" id="enemy-pips"><i></i><i></i><i></i><i></i></div>
+      <div id="status-line" class="hud-sub">CLEAR THE ROOM</div>
+    </section>
+    <div id="crosshair"><i></i><i></i><i></i><i></i><b></b></div>
+    <div id="pickup-prompt" class="pickup-prompt">▣ &nbsp; PICK UP ROUND <span>[E]</span></div>
+    <div class="bottom-hud">
+      <div class="ammo-block"><span class="ammo-caption">CHAMBER</span><div class="ammo-row"><span id="ammo-count">01</span><div class="bullet-icon" id="bullet-icon"></div></div><span id="ammo-state">ROUND LOADED</span></div>
+      <div class="controls-hint" id="controls-hint"><kbd>WASD</kbd> MOVE <span>·</span> <kbd>MOUSE</kbd> AIM <span>·</span> <kbd>CLICK</kbd> FIRE</div>
+      <div class="objective"><span class="objective-dot"></span><span>ONE ROUND. <b>DON'T LOSE IT.</b></span></div>
+    </div>
+    <div class="damage-flash" id="damage-flash"></div>
+    <div id="toast" class="toast"></div>
+
+    <section id="intro" class="overlay">
+      <div class="intro-card">
+        <div class="eyebrow"><span></span> UAC FIELD TEST // 09.17.2147</div>
+        <h1>ONE<br><em>ROUND.</em></h1>
+        <p class="intro-copy">The armory's gone. You have <b>one bullet</b>—and the things in here want it more than you do.</p>
+        <div class="rule"><span>01</span><p>Fire your round. It will land somewhere in the room.</p></div>
+        <div class="rule"><span>02</span><p>Find it. Get close and <b>pick it back up</b> to reload.</p></div>
+        <div class="rule"><span>03</span><p>Put every hellspawn down. Try not to join them.</p></div>
+        <button id="start-button" class="start-button">ENTER THE FOUNDRY <span>→</span></button>
+        <div class="input-note" id="input-note">WASD MOVE &nbsp;·&nbsp; MOUSE LOOK &nbsp;·&nbsp; CLICK FIRE &nbsp;·&nbsp; E PICK UP</div>
+      </div>
+      <div class="overlay-stamp">CLASSIFIED<br>UAC / MARS</div>
+    </section>
+
+    <section id="end-screen" class="overlay hidden">
+      <div class="intro-card end-card">
+        <div class="eyebrow"><span></span> FIELD REPORT // SECTOR 09</div>
+        <h1 id="end-title">ROOM<br><em>CLEARED.</em></h1>
+        <p id="end-copy" class="intro-copy">The foundry is quiet. For now.</p>
+        <div class="stat-row"><span>HOSTILES ELIMINATED</span><b id="final-kills">04 / 04</b></div>
+        <button id="restart-button" class="start-button">RUN IT BACK <span>↻</span></button>
+        <div class="input-note">YOUR ROUND IS STILL OUT THERE SOMEWHERE.</div>
+      </div>
+    </section>
+
+    <div class="touch-ui" id="touch-ui">
+      <div id="joystick" class="joystick"><div class="joy-ring"></div><div id="joy-knob" class="joy-knob"></div><span>MOVE</span></div>
+      <button id="fire-button" class="fire-button"><span>✦</span><small>FIRE</small></button>
+      <button id="pickup-button" class="pickup-button">PICK UP<br><b>ROUND</b></button>
+      <div class="look-hint">DRAG TO LOOK</div>
+    </div>
+  </main>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"}}
+  </script>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
